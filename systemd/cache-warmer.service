@@ -1,0 +1,15 @@
+[Unit]
+Description=Cache Warmer Service
+After=network.target
+
+[Service]
+Type=simple
+User=cache-warmer
+Group=cache-warmer
+WorkingDirectory=/opt/cache-warmer
+ExecStart=/opt/cache-warmer/cache-warmer -config /etc/cache-warmer/config.yaml -interval 10m
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

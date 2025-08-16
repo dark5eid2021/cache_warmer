@@ -1,0 +1,94 @@
+# Cache Warmer Configuration File
+# This file contains all configuration options for the cache warming tool
+
+# List of URLs to warm - REQUIRED
+# Each URL should be a fully qualified HTTP or HTTPS URL
+urls:
+  - "https://example.com"
+  - "https://example.com/api/health"
+  - "https://example.com/api/products"
+  - "https://example.com/static/app.css"
+  - "https://example.com/static/app.js"
+
+# Number of concurrent workers (default: 10)
+# Increase for higher throughput, decrease to reduce server load
+workers: 10
+
+# HTTP request timeout (default: 30s)
+# Format: duration string (e.g., "30s", "1m", "500ms")
+timeout: 30s
+
+# Number of retries for failed requests (default: 3)
+# Set to 0 to disable retries
+retry_count: 3
+
+# Delay between retries (default: 1s)
+# Format: duration string (e.g., "1s", "500ms", "2s")
+retry_delay: 1s
+
+# User-Agent header to send with requests (default: "Cache-Warmer/1.0")
+user_agent: "Cache-Warmer/1.0 (MyCompany Bot)"
+
+# Custom headers to include in all requests
+headers:
+  # Add authorization if needed
+  # Authorization: "Bearer your-token-here"
+  
+  # Add custom headers for your application
+  X-Cache-Warmer: "true"
+  X-Request-Source: "cache-warmer"
+  
+  # Disable caching if you want to force fresh responses
+  # Cache-Control: "no-cache"
+
+# Whether to follow HTTP redirects (default: true)
+follow_redirects: true
+
+# Maximum number of redirects to follow (default: 5)
+max_redirects: 5
+
+# HTTP status codes considered successful (default: [200, 201, 202, 204, 301, 302, 304])
+# Add or remove codes based on your application's behavior
+success_codes:
+  - 200  # OK
+  - 201  # Created
+  - 202  # Accepted
+  - 204  # No Content
+  - 301  # Moved Permanently
+  - 302  # Found
+  - 304  # Not Modified
+
+# Metrics configuration for monitoring and observability
+metrics:
+  # Enable metrics collection and HTTP endpoint (default: false)
+  enabled: true
+  
+  # Port to serve metrics on (default: 8080)
+  port: 8080
+  
+  # Path to serve metrics on (default: "/metrics")
+  path: "/metrics"
+
+# Additional configuration examples:
+
+# Example for high-traffic warming:
+# workers: 50
+# timeout: 10s
+# retry_count: 1
+# retry_delay: 500ms
+
+# Example for conservative warming:
+# workers: 5
+# timeout: 60s
+# retry_count: 5
+# retry_delay: 2s
+
+# Example headers for authenticated endpoints:
+# headers:
+#   Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+#   X-API-Key: "your-api-key-here"
+
+# Example for warming behind a load balancer:
+# headers:
+#   X-Forwarded-For: "10.0.0.1"
+#   X-Real-IP: "10.0.0.1"
