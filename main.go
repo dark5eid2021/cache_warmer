@@ -10,7 +10,7 @@ import (
 )
 
 // Version information for the cache warming tool
-const Version = "1.0.0"
+const Version = "0.0.1"
 
 func main() {
 	// Define command line flags for configuration
